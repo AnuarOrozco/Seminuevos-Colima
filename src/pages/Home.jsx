@@ -151,48 +151,48 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-light">
         <Header />
-      {/* Hero Section */}
-      <motion.section 
-        ref={heroRef}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: heroInView ? 1 : 0.8 }}
-        transition={{ duration: 0.5 }}
-        className="relative h-96 bg-gradient-to-r from-primary-700 to-primary-500 flex items-center justify-center text-white"
-      >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1 
+    /* Hero Section */
+        <motion.section 
+          ref={heroRef}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: heroInView ? 1 : 0.8 }}
+          transition={{ duration: 0.5 }}
+          className="relative h-96 bg-gradient-to-br from-primary-700 via-primary-500 to-accent-400 flex items-center justify-center text-white"
+        >
+          <div className="container mx-auto px-4 text-center">
+            <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-5xl font-bold mb-4 font-display"
-          >
-            Encuentra tu auto ideal en Seminuevos Colima
-          </motion.h1>
-          <motion.p
+            className="text-4xl md:text-5xl font-bold mb-4 font-display text-white"
+            >
+            Encuentra tu auto ideal en Seminuevos Colima 
+            </motion.h1>
+            <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
             className="text-xl mb-8 max-w-2xl mx-auto"
-          >
+            >
             Los mejores autos nuevos y seminuevos con garantía y financiamiento
-          </motion.p>
-          <motion.div
+            </motion.p>
+            <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
             className="relative max-w-md mx-auto"
-          >
+            >
             <input
               type="text"
               placeholder="Buscar por marca o modelo..."
               className="w-full py-3 px-4 pr-12 rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
             <FiSearch className="absolute right-4 top-3.5 text-dark-muted text-xl" />
-          </motion.div>
-        </div>
-      </motion.section>
+            </motion.div>
+          </div>
+        </motion.section>
 
-      {/* Main Content */}
+        {/* Main Content */}}
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Section */}
