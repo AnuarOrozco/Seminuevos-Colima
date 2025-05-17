@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { FiUser, FiLock, FiMail, FiArrowRight } from 'react-icons/fi';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -10,13 +12,16 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Lógica de autenticación aquí
-    setTimeout(() => setIsSubmitting(false), 1500);
+    // Simulación de autenticación
+    setTimeout(() => {
+      setIsSubmitting(false);
+      // Aquí iría la lógica de redirección después del login
+    }, 1500);
   };
 
   return (
     <div className="min-h-screen bg-light flex flex-col">
-      <Header /> {/* Reutilizamos el mismo Header */}
+      <Header />
 
       <motion.main
         initial={{ opacity: 0 }}
@@ -94,9 +99,9 @@ const LoginForm = () => {
                   />
                 </div>
                 <div className="text-right mt-2">
-                  <a href="#" className="text-sm text-primary-500 hover:text-primary-700 transition-colors">
+                  <Link to="/recuperar-contrasena" className="text-sm text-primary-500 hover:text-primary-700 transition-colors">
                     ¿Olvidaste tu contraseña?
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
 
@@ -131,9 +136,9 @@ const LoginForm = () => {
             >
               <p className="text-dark-muted">
                 ¿No tienes una cuenta?{' '}
-                <a href="#" className="text-primary-500 hover:text-primary-700 font-medium transition-colors">
+                <Link to="/registro" className="text-primary-500 hover:text-primary-700 font-medium transition-colors">
                   Regístrate
-                </a>
+                </Link>
               </p>
             </motion.div>
           </motion.div>
