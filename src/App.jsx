@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
+import RegisterForm from './pages/RegisterForm';
 
 function App() {
   // Temp components
@@ -106,6 +107,37 @@ function App() {
                     key="login"
                   >
                     <LoginForm />
+                  </motion.div>
+                } 
+              />
+              
+              {/* Register */}
+              <Route 
+                path="/registro" 
+                element={
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    key="register"
+                  >
+                    <RegisterForm />
+                  </motion.div>
+                } 
+              />
+              
+              {/* Password Recovery */}
+              <Route 
+                path="/recuperar-contrasena" 
+                element={
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <TempComponent title="Recuperar Contraseña" />
                   </motion.div>
                 } 
               />
