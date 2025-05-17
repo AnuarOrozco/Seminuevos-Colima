@@ -4,24 +4,37 @@
 
 @layer base {
   :root {
-    --primary: 211 100% 50%; /* Main Color */
-    --secondary: 38 92% 50%; /* Seconday color */
-    --dark: 222 47% 11%; /* Text color */
-    --light: 0 0% 98%; /* Background  */
+    /* Color principal naranja (vibrante pero suave) */
+    --primary: 24 95% 58%; /* #F97316 - Naranja principal */
+    
+    /* Colores secundarios */
+    --secondary: 215 25% 27%; /* #1E293B - Azul oscuro para contraste */
+    --accent: 37 98% 54%; /* #F59E0B - Amarillo-naranja para acentos */
+    --success: 142 71% 45%; /* #10B981 - Verde para acciones positivas */
+    
+    /* Escala de grises */
+    --dark: 222 47% 11%; /* #0F172A - Texto principal */
+    --dark-muted: 215 16% 47%; /* #64748B - Texto secundario */
+    --light: 0 0% 98%; /* #FAFAFA - Fondo claro */
+    --light-muted: 210 20% 98%; /* #F1F5F9 - Fondos secundarios */
+    
+    /* Variaciones del naranja para estados */
+    --primary-light: 24 95% 90%; /* Para hover claros */
+    --primary-dark: 24 95% 40%; /* Para bordes o hover oscuros */
   }
 
-  /* HTML Styles */
+  /* Estilos base para elementos HTML */
   html {
     @apply scroll-smooth;
   }
 
   body {
-    @apply bg-gray-50 text-gray-900 font-sans antialiased min-h-screen;
+    @apply bg-light text-dark font-sans antialiased min-h-screen;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold leading-tight text-gray-900;
+    @apply font-bold leading-tight text-dark;
   }
 
   h1 {
@@ -37,10 +50,10 @@
   }
 
   a {
-    @apply text-blue-600 hover:text-blue-800 transition-colors duration-200;
+    @apply text-primary-500 hover:text-primary-700 transition-colors duration-200;
   }
 
-  /* Custom animations */
+  /* Animaciones personalizadas */
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -52,27 +65,27 @@
 }
 
 @layer components {
-  /* Base buttons */
+  /* Botones base */
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-200;
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700 hover:shadow-md;
+    @apply bg-primary-500 text-white hover:bg-primary-600 hover:shadow-md;
   }
 
   .btn-secondary {
-    @apply bg-orange-500 text-white hover:bg-orange-600 hover:shadow-md;
+    @apply bg-accent-500 text-white hover:bg-accent-600 hover:shadow-md;
   }
 
-  /* Vehicle cards */
+  /* Cards de vehículos */
   .vehicle-card {
-    @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+    @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-light-muted;
   }
 }
 
 @layer utilities {
-  /* Custom utils */
+  /* Utilidades personalizadas */
   .text-balance {
     text-wrap: balance;
   }

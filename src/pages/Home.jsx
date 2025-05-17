@@ -43,7 +43,32 @@ const Home = () => {
       price: 350999,
       type: 'seminuevo'
     },
-    // ... más vehículos
+    {
+      id: 2,
+      title: 'Toyota Corolla 2023',
+      image: 'https://source.unsplash.com/random/600x400/?car,toyota',
+      specs: {
+        year: 2023,
+        mileage: 12500,
+        transmission: 'Automático',
+        fuel: 'Híbrido'
+      },
+      price: 420999,
+      type: 'seminuevo'
+    },
+    {
+      id: 3,
+      title: 'Volkswagen Jetta 2024',
+      image: 'https://source.unsplash.com/random/600x400/?car,volkswagen',
+      specs: {
+        year: 2024,
+        mileage: 0,
+        transmission: 'Automático',
+        fuel: 'Gasolina'
+      },
+      price: 389999,
+      type: 'nuevo'
+    },
   ];
 
   const toggleFilter = (filterName) => {
@@ -51,21 +76,21 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-light">
       {/* Hero Section */}
       <motion.section 
         ref={heroRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: heroInView ? 1 : 0.8 }}
         transition={{ duration: 0.5 }}
-        className="relative h-96 bg-gradient-to-r from-blue-800 to-blue-600 flex items-center justify-center text-white"
+        className="relative h-96 bg-gradient-to-r from-primary-700 to-primary-500 flex items-center justify-center text-white"
       >
         <div className="container mx-auto px-4 text-center">
           <motion.h1 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-5xl font-bold mb-4"
+            className="text-4xl md:text-5xl font-bold mb-4 font-display"
           >
             Encuentra tu auto ideal en Seminuevos Colima
           </motion.h1>
@@ -86,9 +111,9 @@ const Home = () => {
             <input
               type="text"
               placeholder="Buscar por marca o modelo..."
-              className="w-full py-3 px-4 pr-12 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full py-3 px-4 pr-12 rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
-            <FiSearch className="absolute right-4 top-3.5 text-gray-500 text-xl" />
+            <FiSearch className="absolute right-4 top-3.5 text-dark-muted text-xl" />
           </motion.div>
         </div>
       </motion.section>
@@ -100,11 +125,11 @@ const Home = () => {
           <div className="lg:w-1/4">
             <div className="bg-white p-6 rounded-xl shadow-md sticky top-4">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold flex items-center">
-                  <FiFilter className="mr-2" /> Filtros
+                <h2 className="text-xl font-bold flex items-center text-dark">
+                  <FiFilter className="mr-2 text-primary-500" /> Filtros
                 </h2>
                 <button 
-                  className="text-blue-600 text-sm font-medium"
+                  className="text-primary-600 text-sm font-medium hover:text-primary-700 transition-colors"
                   onClick={() => setFilters({
                     type: 'all',
                     brands: [],
@@ -123,13 +148,21 @@ const Home = () => {
               <div className="mb-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <button
-                    className={`flex-1 py-2 rounded-lg font-medium ${filters.type === 'nuevo' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'}`}
+                    className={`flex-1 py-2 rounded-lg font-medium transition-colors ${
+                      filters.type === 'nuevo' 
+                        ? 'bg-primary-500 text-white hover:bg-primary-600' 
+                        : 'bg-light-muted text-dark hover:bg-light'
+                    }`}
                     onClick={() => setFilters({...filters, type: 'nuevo'})}
                   >
                     Nuevos
                   </button>
                   <button
-                    className={`flex-1 py-2 rounded-lg font-medium ${filters.type === 'seminuevo' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-800'}`}
+                    className={`flex-1 py-2 rounded-lg font-medium transition-colors ${
+                      filters.type === 'seminuevo' 
+                        ? 'bg-primary-500 text-white hover:bg-primary-600' 
+                        : 'bg-light-muted text-dark hover:bg-light'
+                    }`}
                     onClick={() => setFilters({...filters, type: 'seminuevo'})}
                   >
                     Seminuevos
@@ -146,13 +179,15 @@ const Home = () => {
                 { name: 'carType', title: 'Tipo de auto' },
                 { name: 'transmission', title: 'Transmisión' }
               ].map((filter) => (
-                <div key={filter.name} className="mb-4 border-b border-gray-100 pb-4">
+                <div key={filter.name} className="mb-4 border-b border-light pb-4">
                   <button
-                    className="w-full flex justify-between items-center py-2 text-left"
+                    className="w-full flex justify-between items-center py-2 text-left hover:text-primary-500 transition-colors"
                     onClick={() => toggleFilter(filter.name)}
                   >
-                    <span className="font-medium">{filter.title}</span>
-                    <FiChevronDown className={`transition-transform ${activeFilter === filter.name ? 'rotate-180' : ''}`} />
+                    <span className="font-medium text-dark">{filter.title}</span>
+                    <FiChevronDown className={`transition-transform text-primary-500 ${
+                      activeFilter === filter.name ? 'rotate-180' : ''
+                    }`} />
                   </button>
                   <AnimatePresence>
                     {activeFilter === filter.name && (
@@ -164,14 +199,21 @@ const Home = () => {
                         className="overflow-hidden"
                       >
                         <div className="py-2 space-y-2">
-                          {/* Aquí irían las opciones reales de cada filtro */}
                           <div className="flex items-center">
-                            <input type="checkbox" id={`${filter.name}-option1`} className="mr-2" />
-                            <label htmlFor={`${filter.name}-option1`}>Opción 1</label>
+                            <input 
+                              type="checkbox" 
+                              id={`${filter.name}-option1`} 
+                              className="mr-2 rounded text-primary-500 focus:ring-primary-500"
+                            />
+                            <label htmlFor={`${filter.name}-option1`} className="text-dark-muted">Opción 1</label>
                           </div>
                           <div className="flex items-center">
-                            <input type="checkbox" id={`${filter.name}-option2`} className="mr-2" />
-                            <label htmlFor={`${filter.name}-option2`}>Opción 2</label>
+                            <input 
+                              type="checkbox" 
+                              id={`${filter.name}-option2`} 
+                              className="mr-2 rounded text-primary-500 focus:ring-primary-500"
+                            />
+                            <label htmlFor={`${filter.name}-option2`} className="text-dark-muted">Opción 2</label>
                           </div>
                         </div>
                       </motion.div>
@@ -185,12 +227,12 @@ const Home = () => {
           {/* Vehicles Gallery */}
           <div className="lg:w-3/4">
             <div className="mb-8 flex justify-between items-center">
-              <h2 className="text-2xl font-bold">
+              <h2 className="text-2xl font-bold text-dark">
                 {filters.type === 'all' ? 'Todos los vehículos' : filters.type === 'nuevo' ? 'Autos nuevos' : 'Autos seminuevos'}
               </h2>
               <div className="flex items-center">
-                <span className="mr-2 text-gray-600">Ordenar por:</span>
-                <select className="bg-gray-100 rounded-lg px-3 py-1 focus:outline-none">
+                <span className="mr-2 text-dark-muted">Ordenar por:</span>
+                <select className="bg-light-muted rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 text-dark">
                   <option>Recomendados</option>
                   <option>Precio: menor a mayor</option>
                   <option>Precio: mayor a menor</option>
@@ -209,7 +251,7 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                   whileHover={{ y: -5 }}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-light"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <LazyLoadImage
@@ -218,35 +260,39 @@ const Home = () => {
                       effect="opacity"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                    <div className="absolute top-2 left-2 bg-white px-2 py-1 rounded-md text-xs font-semibold shadow-sm">
+                    <div className={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-semibold shadow-sm ${
+                      vehicle.type === 'nuevo' 
+                        ? 'bg-accent-500 text-white' 
+                        : 'bg-white text-dark'
+                    }`}>
                       {vehicle.type === 'nuevo' ? 'Nuevo' : 'Seminuevo'}
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="text-lg font-bold mb-2">{vehicle.title}</h3>
-                    <div className="flex flex-wrap gap-3 mb-4 text-sm text-gray-600">
+                    <h3 className="text-lg font-bold mb-2 text-dark">{vehicle.title}</h3>
+                    <div className="flex flex-wrap gap-3 mb-4 text-sm text-dark-muted">
                       <div className="flex items-center">
-                        <FaTachometerAlt className="mr-1 text-blue-600" />
+                        <FaTachometerAlt className="mr-1 text-primary-500" />
                         {vehicle.specs.mileage.toLocaleString()} km
                       </div>
                       <div className="flex items-center">
-                        <FaCar className="mr-1 text-blue-600" />
+                        <FaCar className="mr-1 text-primary-500" />
                         {vehicle.specs.year}
                       </div>
                       <div className="flex items-center">
-                        <FaGasPump className="mr-1 text-blue-600" />
+                        <FaGasPump className="mr-1 text-primary-500" />
                         {vehicle.specs.transmission}
                       </div>
                     </div>
                     <div className="mt-4">
-                      <p className="text-xl font-bold text-blue-600">
+                      <p className="text-xl font-bold text-primary-600">
                         ${vehicle.price.toLocaleString()}
                       </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-xs text-dark-muted">
                         Desde ${Math.round(vehicle.price / 76).toLocaleString()} /mes*
                       </p>
                     </div>
-                    <button className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-colors duration-200">
+                    <button className="mt-4 w-full bg-primary-500 hover:bg-primary-600 text-white py-2 rounded-lg font-medium transition-colors duration-200">
                       Ver detalles
                     </button>
                   </div>
@@ -256,7 +302,7 @@ const Home = () => {
 
             {/* Featured Vehicles Slider */}
             <div className="mt-16">
-              <h2 className="text-2xl font-bold mb-6">Destacados</h2>
+              <h2 className="text-2xl font-bold mb-6 text-dark">Destacados</h2>
               <Swiper
                 spaceBetween={20}
                 slidesPerView={1.2}
@@ -268,7 +314,7 @@ const Home = () => {
               >
                 {vehicles.map((vehicle) => (
                   <SwiperSlide key={`featured-${vehicle.id}`}>
-                    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden border border-light">
                       <div className="relative h-48 overflow-hidden">
                         <LazyLoadImage
                           src={vehicle.image}
@@ -276,12 +322,22 @@ const Home = () => {
                           effect="opacity"
                           className="w-full h-full object-cover"
                         />
+                        <div className={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-semibold shadow-sm ${
+                          vehicle.type === 'nuevo' 
+                            ? 'bg-accent-500 text-white' 
+                            : 'bg-white text-dark'
+                        }`}>
+                          {vehicle.type === 'nuevo' ? 'Nuevo' : 'Seminuevo'}
+                        </div>
                       </div>
                       <div className="p-4">
-                        <h3 className="text-lg font-bold">{vehicle.title}</h3>
-                        <p className="text-blue-600 font-bold mt-2">
+                        <h3 className="text-lg font-bold text-dark">{vehicle.title}</h3>
+                        <p className="text-primary-500 font-bold mt-2">
                           ${vehicle.price.toLocaleString()}
                         </p>
+                        <button className="mt-3 w-full bg-primary-500 hover:bg-primary-600 text-white py-1.5 rounded-lg font-medium transition-colors duration-200 text-sm">
+                          Ver detalles
+                        </button>
                       </div>
                     </div>
                   </SwiperSlide>
