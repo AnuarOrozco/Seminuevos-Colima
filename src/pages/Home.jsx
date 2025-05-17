@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FiChevronDown, FiFilter, FiSearch } from 'react-icons/fi';
 import { FaCar, FaGasPump, FaTachometerAlt, FaStar, FaRegStar } from 'react-icons/fa';
+import Header from '../components/Header';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -149,6 +150,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-light">
+        <Header />
       {/* Hero Section */}
       <motion.section 
         ref={heroRef}
