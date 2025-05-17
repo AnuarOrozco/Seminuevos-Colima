@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import Home from './pages/Home';
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen flex flex-col bg-gray-50">
-        {/* Header/Navbar irá aquí */}
+        {/* Header here reminder */}
         
         <main className="flex-grow">
           <AnimatePresence mode="wait">
@@ -19,8 +20,7 @@ function App() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {/* Contenido de la página de inicio irá aquí */}
-                    <h1 className="text-3xl font-bold text-center mt-8">Bienvenido a Seminuevos Colima</h1>
+                    <Home />
                   </motion.div>
                 } 
               />
@@ -58,7 +58,7 @@ function App() {
           </AnimatePresence>
         </main>
         
-        {/* Footer irá aquí */}
+        {/* Reminder Footer here */}
       </div>
     </Router>
   );
