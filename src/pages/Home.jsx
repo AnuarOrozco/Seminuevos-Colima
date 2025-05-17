@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FiChevronDown, FiFilter, FiSearch } from 'react-icons/fi';
-import { FaCar, FaGasPump, FaTachometerAlt } from 'react-icons/fa';
+import { FaCar, FaGasPump, FaTachometerAlt, FaStar, FaRegStar } from 'react-icons/fa';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -33,46 +33,118 @@ const Home = () => {
     {
       id: 1,
       title: 'Nissan Sentra 2022',
-      image: 'https://source.unsplash.com/random/600x400/?car,nissan',
+      image: 'https://source.unsplash.com/random/800x600/?car,nissan',
       specs: {
         year: 2022,
         mileage: 18500,
         transmission: 'Automático',
-        fuel: 'Gasolina'
+        fuel: 'Gasolina',
+        condition: 'Excelente',
+        rating: 4.5
       },
       price: 350999,
-      type: 'seminuevo'
+      type: 'seminuevo',
+      featured: true
     },
     {
       id: 2,
       title: 'Toyota Corolla 2023',
-      image: 'https://source.unsplash.com/random/600x400/?car,toyota',
+      image: 'https://source.unsplash.com/random/800x600/?car,toyota',
       specs: {
         year: 2023,
         mileage: 12500,
         transmission: 'Automático',
-        fuel: 'Híbrido'
+        fuel: 'Híbrido',
+        condition: 'Como nuevo',
+        rating: 5
       },
       price: 420999,
-      type: 'seminuevo'
+      type: 'seminuevo',
+      featured: true
     },
     {
       id: 3,
       title: 'Volkswagen Jetta 2024',
-      image: 'https://source.unsplash.com/random/600x400/?car,volkswagen',
+      image: 'https://source.unsplash.com/random/800x600/?car,volkswagen',
       specs: {
         year: 2024,
         mileage: 0,
         transmission: 'Automático',
-        fuel: 'Gasolina'
+        fuel: 'Gasolina',
+        condition: 'Nuevo',
+        rating: 4.8
       },
       price: 389999,
-      type: 'nuevo'
+      type: 'nuevo',
+      featured: true
+    },
+    {
+      id: 4,
+      title: 'Honda Civic 2021',
+      image: 'https://source.unsplash.com/random/800x600/?car,honda',
+      specs: {
+        year: 2021,
+        mileage: 32000,
+        transmission: 'Automático',
+        fuel: 'Gasolina',
+        condition: 'Muy bueno',
+        rating: 4.2
+      },
+      price: 289999,
+      type: 'seminuevo'
+    },
+    {
+      id: 5,
+      title: 'Mazda CX-5 2023',
+      image: 'https://source.unsplash.com/random/800x600/?car,mazda',
+      specs: {
+        year: 2023,
+        mileage: 15000,
+        transmission: 'Automático',
+        fuel: 'Gasolina',
+        condition: 'Excelente',
+        rating: 4.7
+      },
+      price: 459999,
+      type: 'seminuevo'
+    },
+    {
+      id: 6,
+      title: 'Ford Mustang 2022',
+      image: 'https://source.unsplash.com/random/800x600/?car,mustang',
+      specs: {
+        year: 2022,
+        mileage: 12000,
+        transmission: 'Automático',
+        fuel: 'Gasolina',
+        condition: 'Excelente',
+        rating: 4.9
+      },
+      price: 689999,
+      type: 'seminuevo'
     },
   ];
 
   const toggleFilter = (filterName) => {
     setActiveFilter(activeFilter === filterName ? null : filterName);
+  };
+
+  const renderRating = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else if (i === fullStars + 1 && hasHalfStar) {
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-yellow-400" />);
+      }
+    }
+    
+    return stars;
   };
 
   return (
@@ -243,57 +315,76 @@ const Home = () => {
             </div>
 
             {/* Vehicle Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
               {vehicles.map((vehicle) => (
                 <motion.div
                   key={vehicle.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  whileHover={{ y: -5 }}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-light"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-light-muted"
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <div className="relative h-64 overflow-hidden">
                     <LazyLoadImage
                       src={vehicle.image}
                       alt={vehicle.title}
                       effect="opacity"
                       className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                     />
-                    <div className={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-semibold shadow-sm ${
+                    <div className={`absolute top-3 left-3 px-3 py-1 rounded-md text-sm font-semibold shadow-sm ${
                       vehicle.type === 'nuevo' 
                         ? 'bg-accent-500 text-white' 
                         : 'bg-white text-dark'
                     }`}>
                       {vehicle.type === 'nuevo' ? 'Nuevo' : 'Seminuevo'}
                     </div>
+                    {vehicle.featured && (
+                      <div className="absolute top-3 right-3 bg-primary-500 text-white px-2 py-1 rounded-md text-xs font-bold">
+                        Destacado
+                      </div>
+                    )}
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold mb-2 text-dark">{vehicle.title}</h3>
-                    <div className="flex flex-wrap gap-3 mb-4 text-sm text-dark-muted">
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-xl font-bold text-dark">{vehicle.title}</h3>
                       <div className="flex items-center">
-                        <FaTachometerAlt className="mr-1 text-primary-500" />
+                        {renderRating(vehicle.specs.rating)}
+                        <span className="ml-1 text-sm text-dark-muted">({vehicle.specs.rating})</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm text-primary-500 mb-3">{vehicle.specs.condition}</p>
+                    
+                    <div className="flex flex-wrap gap-3 mb-5 text-sm text-dark-muted">
+                      <div className="flex items-center">
+                        <FaTachometerAlt className="mr-2 text-primary-500" />
                         {vehicle.specs.mileage.toLocaleString()} km
                       </div>
                       <div className="flex items-center">
-                        <FaCar className="mr-1 text-primary-500" />
+                        <FaCar className="mr-2 text-primary-500" />
                         {vehicle.specs.year}
                       </div>
                       <div className="flex items-center">
-                        <FaGasPump className="mr-1 text-primary-500" />
+                        <FaGasPump className="mr-2 text-primary-500" />
                         {vehicle.specs.transmission}
                       </div>
                     </div>
+                    
                     <div className="mt-4">
-                      <p className="text-xl font-bold text-primary-600">
+                      <p className="text-2xl font-bold text-primary-600">
                         ${vehicle.price.toLocaleString()}
                       </p>
-                      <p className="text-xs text-dark-muted">
+                      <p className="text-sm text-dark-muted mt-1">
                         Desde ${Math.round(vehicle.price / 76).toLocaleString()} /mes*
                       </p>
                     </div>
-                    <button className="mt-4 w-full bg-primary-500 hover:bg-primary-600 text-white py-2 rounded-lg font-medium transition-colors duration-200">
+                    
+                    <button className="mt-6 w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center">
                       Ver detalles
+                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
                     </button>
                   </div>
                 </motion.div>
@@ -304,25 +395,26 @@ const Home = () => {
             <div className="mt-16">
               <h2 className="text-2xl font-bold mb-6 text-dark">Destacados</h2>
               <Swiper
-                spaceBetween={20}
+                spaceBetween={30}
                 slidesPerView={1.2}
                 breakpoints={{
-                  640: { slidesPerView: 2.2 },
+                  640: { slidesPerView: 1.5 },
+                  768: { slidesPerView: 2.2 },
                   1024: { slidesPerView: 3.2 }
                 }}
-                className="pb-8"
+                className="pb-12"
               >
-                {vehicles.map((vehicle) => (
+                {vehicles.filter(v => v.featured).map((vehicle) => (
                   <SwiperSlide key={`featured-${vehicle.id}`}>
-                    <div className="bg-white rounded-xl shadow-md overflow-hidden border border-light">
-                      <div className="relative h-48 overflow-hidden">
+                    <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-light-muted h-full">
+                      <div className="relative h-56 overflow-hidden">
                         <LazyLoadImage
                           src={vehicle.image}
                           alt={vehicle.title}
                           effect="opacity"
                           className="w-full h-full object-cover"
                         />
-                        <div className={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-semibold shadow-sm ${
+                        <div className={`absolute top-3 left-3 px-3 py-1 rounded-md text-sm font-semibold shadow-sm ${
                           vehicle.type === 'nuevo' 
                             ? 'bg-accent-500 text-white' 
                             : 'bg-white text-dark'
@@ -330,12 +422,16 @@ const Home = () => {
                           {vehicle.type === 'nuevo' ? 'Nuevo' : 'Seminuevo'}
                         </div>
                       </div>
-                      <div className="p-4">
+                      <div className="p-5">
                         <h3 className="text-lg font-bold text-dark">{vehicle.title}</h3>
-                        <p className="text-primary-500 font-bold mt-2">
+                        <div className="flex items-center mt-1 mb-3">
+                          {renderRating(vehicle.specs.rating)}
+                          <span className="ml-1 text-xs text-dark-muted">({vehicle.specs.rating})</span>
+                        </div>
+                        <p className="text-xl font-bold text-primary-500 mt-2">
                           ${vehicle.price.toLocaleString()}
                         </p>
-                        <button className="mt-3 w-full bg-primary-500 hover:bg-primary-600 text-white py-1.5 rounded-lg font-medium transition-colors duration-200 text-sm">
+                        <button className="mt-4 w-full bg-primary-500 hover:bg-primary-600 text-white py-2 rounded-lg font-medium transition-colors duration-200">
                           Ver detalles
                         </button>
                       </div>
