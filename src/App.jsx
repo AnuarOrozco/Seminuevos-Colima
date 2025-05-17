@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
 import LoginForm from './pages/LoginForm';
 import RegisterForm from './pages/RegisterForm';
+import Footer from './components/Footer';
 
 function App() {
   // Temp components
@@ -164,6 +165,7 @@ function App() {
         </main>
         
         {/* Footer hereee */}
+        <Footer />
       </div>
     </Router>
   );
