@@ -151,7 +151,6 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-light">
         <Header />
-    /* Hero Section */
         <motion.section 
           ref={heroRef}
           initial={{ opacity: 0 }}
@@ -192,7 +191,7 @@ const Home = () => {
           </div>
         </motion.section>
 
-        {/* Main Content */}}
+        {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Section */}
